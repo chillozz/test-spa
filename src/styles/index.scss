@@ -75,4 +75,26 @@ input {
 	&:hover {
 		background-color: #ffc96b;
 	}
+
+	&:disabled {
+		opacity: 0.5;
+
+		&:hover {
+			background-color: #ffb12b;
+		}
+	}
+}
+
+.notifier {
+	padding: 0;
+	margin: 10px 0 15px 0;
+	color: #a6a6a6;
+
+	&#{&}_state_success {
+		color: #00cba7;
+	}
+
+	&#{&}_state_error {
+		color: #e30000;
+	}
 }
