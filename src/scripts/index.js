@@ -1,3 +1,2 @@
+import "normalize.css/normalize.css";
 import '../styles/index.scss';
-
-console.log('webpack starterkit');
