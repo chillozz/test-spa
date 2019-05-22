@@ -17,7 +17,7 @@ export default class Validator {
 		this.form = form;
 
 		this.apiUrl = 'https://apilayer.net/api/check';
-		this.input = this.form.querySelector('input[name=email]');
+        this.input = this.form.querySelector('input[name=email]');
 		this.button = this.form.querySelector('input[type=submit]');
 		this.notifier = this.form.querySelector('.notifier');
 		this.messages = {
@@ -94,7 +94,7 @@ export default class Validator {
 	 * Sets form button state "enabled" or "disabled".
 	 *
 	 * @method
-	 * @param {Boolean} enabled
+	 * @param {boolean} enabled
 	 * @returns void
 	 */
 	setButtonstate(enabled) {
