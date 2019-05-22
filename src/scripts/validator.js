@@ -1,4 +1,17 @@
+/**
+ * Eemail validator class.
+ * Validate email based on https://mailboxlayer.com API service.
+ *
+ * @class Validator
+ */
 export default class Validator {
+
+	/**
+	 * Constructs new Validator.
+	 *
+	 * @param {string} apiKey
+	 * @param {HTMLElement} form
+	 */
 	constructor(apiKey, form) {
 		this.apiKey = apiKey;
 		this.form = form;
@@ -12,10 +25,16 @@ export default class Validator {
 			valid: 'Valid format'
 		};
 
-		this.init();
+		this.bindEvents();
 	} 
 
-	init() {
+	/**
+	 * Binds events on form and input.
+	 *
+	 * @method
+	 * @returns void
+	 */
+	bindEvents() {
 		this.form.addEventListener('submit', e => {
 			e.preventDefault();
 
@@ -30,6 +49,12 @@ export default class Validator {
 		});
 	}
 
+	/**
+	 * Data requests to API service.
+	 *
+	 * @method
+	 * @returns {Promise}
+	 */
 	fetchData() {
 		return fetch(this.apiUrl+`?access_key=${this.apiKey}&email=${this.input.value}`)
 			.then(response => response.json())
@@ -41,6 +66,14 @@ export default class Validator {
 			});
 	}
 
+	/**
+	 * Validation results notificator.
+	 *
+	 * @method
+	 * @param {string} msg
+	 * @param {string} type
+	 * @returns void
+	 */
 	notify(msg, type) {
 		let className;
 
@@ -57,6 +90,13 @@ export default class Validator {
 		this.notifier.className = `notifier ${className}`;
 	}
 
+	/**
+	 * Sets form button state "enabled" or "disabled".
+	 *
+	 * @method
+	 * @param {Boolean} enabled
+	 * @returns void
+	 */
 	setButtonstate(enabled) {
 		if(enabled) {
 			this.button.removeAttribute("disabled");
