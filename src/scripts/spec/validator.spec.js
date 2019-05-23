@@ -2,8 +2,6 @@ import Validator from '../validator.js';
 
 describe('validator', () => {
 
-    let server;
-
     const createInstance = () => {
         document.body.innerHTML = [
             '<form id="email-form" class="form">',
@@ -22,10 +20,6 @@ describe('validator', () => {
         return new Validator('testApiKey', form);
     };
 
-    beforeEach(() => {
-        server = sinon.createFakeServer();
-    });
-
     it('Should initialize instance', () => {
         const validator = createInstance();
 
@@ -34,8 +28,8 @@ describe('validator', () => {
     });
 
     it('Should request data from API', (done) => {
-        const stub = sinon.stub(window, 'fetch');
         const validator = createInstance();
+        const stub = sinon.stub(window, 'fetch');
         const mockData = { format_valid : true };
 
         validator.apiUrl = 'test/request/url';
@@ -65,6 +59,8 @@ describe('validator', () => {
                 done();
             }
         });
+
+        stub.restore();
     });
 
     context('#notify', () => {
