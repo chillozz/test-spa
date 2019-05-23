@@ -62,7 +62,8 @@ export default class Validator {
 				const message = data.format_valid ? this.messages.valid : this.messages.invalid;
 				const type = data.format_valid ? 'success' : 'error';
 
-				this.notify(message, type);		
+				this.notify(message, type);
+				return data;
 			});
 	}
 

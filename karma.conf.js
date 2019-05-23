@@ -1,12 +1,6 @@
 module.exports = function (config) {
     config.set({
-        browsers: ['PhantomJS'],
-        coverageReporter: {
-            dir: 'tmp/coverage/',
-            reporters: [
-                {type: 'html'}
-            ]
-        },
+        browsers: ['Chrome'],
         files: [
             './src/**/*.spec.js'
         ],
@@ -14,18 +8,15 @@ module.exports = function (config) {
             './src/**/*.spec.js': ['webpack']
         },
         frameworks: ['mocha', 'sinon-chai'],
-        reporters: ['progress', 'coverage'],
+        reporters: ['mocha'],
         webpack: {
             mode: 'development',
             module: {
                 rules: [
                     {
-                        test: /\.js$/i,
+                        test: /\.(js)$/,
                         exclude: /(node_modules)/,
-                        loader: 'babel-loader',
-                        options: {
-                            presets: ['@babel/preset-env']
-                        }
+                        loader: 'babel-loader'
                     }
                 ]
             }

@@ -2,6 +2,8 @@ import Validator from '../validator.js';
 
 describe('validator', () => {
 
+    let server;
+
     const createInstance = () => {
         document.body.innerHTML = [
             '<form id="email-form" class="form">',
@@ -20,6 +22,10 @@ describe('validator', () => {
         return new Validator('testApiKey', form);
     };
 
+    beforeEach(() => {
+        server = sinon.createFakeServer();
+    });
+
     it('Should initialize instance', () => {
         const validator = createInstance();
 
@@ -28,9 +34,37 @@ describe('validator', () => {
     });
 
     it('Should request data from API', (done) => {
+        const stub = sinon.stub(window, 'fetch');
         const validator = createInstance();
+        const mockData = { format_valid : true };
 
-        validator.fetchData();
+        validator.apiUrl = 'test/request/url';
+        validator.input.value = 'example@example.com';
+
+        stub.callsFake(data => {
+            const response = new window.Response(JSON.stringify(mockData), {
+                status: 200,
+                headers: { 'Content-type': 'application/json' }
+            });
+
+            try {
+                expect(data).to.equal('test/request/url?access_key=testApiKey&email=example@example.com');
+            } catch (e) {
+                done(e);
+            }
+
+            return Promise.resolve(response);
+        });
+
+        validator.fetchData().then((data)=>{
+            try {
+                expect(data).to.deep.equal(data);
+            } catch (e) {
+                done(e);
+            } finally {
+                done();
+            }
+        });
     });
 
     context('#notify', () => {
