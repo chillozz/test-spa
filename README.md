@@ -1,9 +1,4 @@
-# Webpack Frontend Starterkit
-
-[![Greenkeeper badge](https://badges.greenkeeper.io/wbkd/webpack-starter.svg)](https://greenkeeper.io/)
-
-A lightweight foundation for your next webpack based frontend project.
-
+# Test SPA
 
 ### Installation
 
@@ -21,6 +16,12 @@ npm start
 
 ```
 npm run build
+```
+
+### Testing
+
+```
+npm run test:single
 ```
 
 ### Features:
